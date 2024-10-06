@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <button id="loadCountriesBtn">Countries</button>
+
+<table id="countriesTable">
+    <thead>
+        <tr>
+            <th>Country Code</th><br>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<script>
+    // document.getElementById('countries').addEventListener('click', loadCountries);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('loadCountriesBtn').addEventListener('click', loadCountries);
+    });
+
+    function loadCountries() {
+        fetch('countries.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+
+                const tableBody = document.getElementById('countriesTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+
+                for (const [countryCode, countryName] of Object.entries(data)) {
+                    const row = tableBody.insertRow();
+                    const cellCode = row.insertCell(0);
+                    const cellName = row.insertCell(1);
+                    cellCode.textContent = countryCode;
+                    cellName.textContent = countryName;
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+</script>
+    
+</body>
+</html>

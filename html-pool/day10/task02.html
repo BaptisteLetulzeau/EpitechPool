@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h2>Name</h2>
+    <form id="nameForm">
+        <label for="nameInput">Name: </label>
+        <input type="text" id="nameInput" name="name" required>
+        <button type="button" onclick="sendRequest('nameInput')">Submit</button>
+    </form>
+
+    <form id="emailForm">
+        <label for="emailInput">Email : </label>
+        <input type="text" id="emailInput" name="email" required>
+        <button type="button" onclick="sendRequest('emailInput')">Submit</button>
+    </form>
+
+    <script>
+        function sendRequest(inputId) {
+            const name = document.getElementById(inputId).value.trim();
+            if (!name) {
+                alert("Please enter a name.");
+                return;
+            }
+
+            const request = new XMLHttpRequest();
+            let param = inputId === 'nameInput' ? 'name=' + encodeURIComponent(name) : 'email=' + encodeURIComponent(name);
+            request.open("GET", "task02.php?" + param, true);
+            request.setRequestHeader("Content-Type", "application/json");
+
+            request.onload = function () {
+                if (request.status === 200) {
+                    try {
+                        const response = JSON.parse(request.responseText);
+                        if (response.name) {
+                            alert("Nom reçu du serveur : " + response.name);
+                        } else if (response.email) {
+                            alert("Email reçu du serveur : " + response.email);
+                        } else if (response.error) {
+                            alert("Erreur : " + response.error);
+                        } else {
+                            alert("Réponse inattendue du serveur.");
+                        }
+                    } catch (e) {
+                        alert("Error parsing JSON response.");
+                    }
+                } else {
+                    alert("An error occurred: " + request.statusText);
+                }
+            };
+
+            request.onerror = function () {
+                alert("An error occurred during the request.");
+            };
+
+            request.send();
+        }
+    </script>
+</body>
+</html>
