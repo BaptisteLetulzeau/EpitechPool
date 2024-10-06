@@ -1,0 +1,86 @@
+.box {
+    border: solid black 2px;
+    margin: 10px;
+    padding: 0 10px 0 10px;
+    background-color: white;
+    position: relative;
+}
+
+.color-gray {
+    background-color:gray;
+}
+
+.aside {
+    width: 100%;
+}
+
+.width-80 {
+    flex: 0 0 80%;
+}
+
+.container {
+    display: flex;
+}
+
+.header {
+    display: grid; 
+    grid-template-columns: 5fr 1fr;
+}
+
+.style-ul {
+    list-style-type: none;
+    display: flex;
+    gap: 40px;
+}
+
+.text-a {
+    text-decoration: none;
+    color: black;
+}
+
+.text-a.active {
+    color: blue;
+    font-weight: bold;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.moving_square {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation: moveSquare 5s ease-in-out 5;
+}
+
+@keyframes moveSquare {
+    0% {
+        top: 0;
+        left: 0;
+        background-color: red;
+    }
+    25% {
+        top: 300px;
+        left: 0;
+        background-color: green;
+    }
+    50% {
+        top: 300px;
+        left: 300px;
+        background-color: blue;
+    }
+    75% {
+        top: 0;
+        left: 300px;
+        background-color: yellow;
+    }
+    100% {
+        top: 0;
+        left: 0;
+        background-color: red;
+    }
+}
