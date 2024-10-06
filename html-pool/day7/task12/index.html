@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="taskForm">
+        <label for="listItem">Task:</label>
+        <input type="text" id="listItem" name="listItem" required>
+        
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="note">Note</option>
+            <option value="email">Email</option>
+            <option value="todo">To-Do</option>
+        </select>
+
+        <button type="submit">Add Task</button>
+    </form>
+    
+    <ul id="taskList">
+    </ul>
+    
+    <script src="script.js"></script>
+</body>
+</html>
